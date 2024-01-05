@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AITEK</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="icon" href="logo.jpeg" style="border-radius: 25px;">
+</head>
+<style>
+    body{
+        background-image: url('body1.jpg');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+    }
+    .btn-1:hover{
+        background-color: rgb(224, 171, 230);
+        border-radius: 25px;
+        width: 300px;
+        height: 60px;
+        border-radius: 30px;
+        opacity: 0.6;
+        transition: 0.4s;
+    }
+    .btn-1{
+        background-color: rgb(219, 212, 148);
+        height: 50px;
+        width: 300px;
+        border-radius: 15px;
+        border: none;
+        transition: height 0.5s, width 0.7s;
+    }
+    .image {
+        width: 350px;
+        height: 258px;
+        transition: width 2s, height 2s, transform 3s;
+        border-radius: 110px;
+    }
+    .image:hover{
+        width: 500px;
+        height: 370px;
+    }
+    .btn:hover{
+        opacity: 0.6;
+        transition: 0.4s;
+    }
+    .nav-logo{
+        border-radius: 20px;
+        height: 70px;
+        width: 130px;
+        transition: width 1s, height 1s, transform 2s;
+    }
+    .nav-logo:hover{
+        height: 80px;
+        width: 150px;
+    }
+</style>
+<body>
+    <nav class="navbar navbar-expand-lg">
+        <div class="container-fluid">
+            <div class="container">
+                <a class="navbar-brand" href="https://www.aitekltd.com/">
+                    <img src="logo.jpeg" class="nav-logo" alt="" width="100" height="60">
+                </a>
+                <button class="navbar-toggler bg-light" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+            </div>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" href="offerForm.html"><button class="bg-light text-dark btn"><b><i>Offer_Details</i></b></button></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="https://leave-tracker-aitekltd.onrender.com/"><button class="btn bg-light text-dark"><b><i>Leave_Tracker</i></b></button></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="./contact"><button class="btn bg-light text-dark"><b><i>Contact_Dev</i></b></button></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="/display"><button class="btn bg-light text-dark"><b><i>Invoice_Det</i></b></button></a>
+                </li>
+            </ul>
+            </div>
+        </div>
+    </nav>
+        <div class="container">
+            <div class="row mt-2">
+                <h1 class="text-center mb-5 text-light"><b>Generate Invoice</b></h1>
+                <div class="col-sm text-center mt-5">
+                    <a href="/kpmgUpload"><button class="btn-outline-dark btn-1 mb-2 me-2"><b><i>KPMG</i></b></button></a>
+                    <a href="/atkFormUpload"><button class="btn-outline-dark btn-1 mb-2 me-2"><b><i>AITEK INDIA to AITEK</i></b></button></a>
+                    <a href="/atkFormUpload"><button class="btn-outline-dark btn-1 mb-2 me-2"><b><i>AITEK INDIA to RADIANT</i></b></button></a>
+                    <a href="/rzUpload"><button class="btn-outline-dark btn-1 mb-2 me-2"><b><i>AITEK INDIA to RIZING</i></b></button></a>
+                    <a href="formjpeg1.html"><button class="btn-outline-dark btn-1 mb-2 me-2"><b><i>Payment receipts</i></b></button></a>
+                    <a href="formjpeg2.html"><button class="btn-outline-dark btn-1 mb-2 me-2"><b><i>Payslip</i></b></button></a>
+                    <a href="/form3upload"><button class="btn-outline-dark btn-1 mb-2 me-2"><b class="fs-5"><i>SEA</i></b><b><i> OPERATIONS INVOICE</i></b></button></a>
+                    <a href="/indFormUpload"><button class="btn-outline-dark btn-1 mb-2 me-2"><b><i>AITEK INDIA to O2</i></b></button></a>
+                </div>
+                <div class="col-sm text-center">
+                    <a href="https://www.aitekltd.com/"><img src="image.jpg" alt="Ai fonts" class="image mt-5"></a>
+                </div>
+            </div>
+        </div>
+</body>
+</html>
