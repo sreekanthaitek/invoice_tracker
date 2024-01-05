@@ -46,19 +46,19 @@ const inputSchema = new mongoose.Schema({
 
 const InputData = mongoose.model('InputData',inputSchema);
 
-app.get('/atkFormUpload',(req,res)=>{
+app.get('/atkFormUpload', authenticate,(req,res)=>{
   res.sendFile(__dirname+'/public/atkFormUpload.html');
 });
 
-app.get('/indFormUpload',(req,res)=>{
+app.get('/indFormUpload',authenticate,(req,res)=>{
   res.sendFile(__dirname+'/public/indFormUpload.html');
 });
 
-app.get('/rzUpload',(req,res)=>{
+app.get('/rzUpload',authenticate,(req,res)=>{
   res.sendFile(__dirname+'/public/rzUpload.html');
 });
 
-app.post('/indFormUpload',async(req,res)=>{
+app.post('/indFormUpload',authenticate,async(req,res)=>{
   let {invoiceNumberf,pn,companyName,status,remarks} = req.body;
   try{
     const inputData = new InputData({
@@ -78,7 +78,7 @@ app.post('/indFormUpload',async(req,res)=>{
   }
 })
 
-app.get('/display', async (req, res) => {
+app.get('/display',authenticate, async (req, res) => {
   try {
     const data = await InputData.find();
     res.render('display', { data });
@@ -87,7 +87,7 @@ app.get('/display', async (req, res) => {
   }
 });
 
-app.post('/update/:id', async (req, res) => {
+app.post('/update/:id',authenticate, async (req, res) => {
   try {
     const { id } = req.params;
     let { invoiceNumberf, pn, companyName, status, remarks } = req.body;
@@ -98,7 +98,7 @@ app.post('/update/:id', async (req, res) => {
   }
 });
 
-app.post('/atkFormUpload',async(req,res)=>{
+app.post('/atkFormUpload',authenticate,async(req,res)=>{
     let {invoiceNumberf,pn,companyName,status,remarks} = req.body;
     try{
       const inputData = new InputData({
@@ -118,7 +118,7 @@ app.post('/atkFormUpload',async(req,res)=>{
     }
 })
 
-app.post('/rzUpload',async(req,res)=>{
+app.post('/rzUpload', authenticate,async(req,res)=>{
   let {invoiceNumberf,pn,companyName,status,remarks} = req.body;
   try{
     const inputData = new InputData({
@@ -138,15 +138,31 @@ app.post('/rzUpload',async(req,res)=>{
   }
 })
 
-app.get('/kpmgUpload',(req,res)=>{
+app.post('/result',authenticate, (req, res) => {
+  const invoiceNumberf = req.body.invoiceNumberf;
+
+  InputData.findOne({ invoiceNumberf: invoiceNumberf }).exec()
+    .then(result => {
+      if (result) {
+        res.render('result', { result: result });
+      } else {
+        res.render('result', { error: "No data found for the given name." });
+      }
+    })
+    .catch(err => {
+      res.render('Please check the spelling');
+    });
+}); 
+
+app.get('/kpmgUpload',authenticate,(req,res)=>{
   res.sendFile(__dirname+'/public/kpmgUpload.html');
 })
 
-app.get('/form3upload',(req,res)=>{
+app.get('/form3upload',authenticate,(req,res)=>{
   res.sendFile(__dirname+'/public/form3upload.html');
 })
 
-app.post('/form3upload',async(req,res)=>{
+app.post('/form3upload', authenticate,async(req,res)=>{
   let {invoiceNumberf,pn,companyName,status,remarks} = req.body;
   try{
     const inputData = new InputData({
@@ -166,7 +182,7 @@ app.post('/form3upload',async(req,res)=>{
   }
 })
 
-app.post('/kpmgUpload',async(req,res)=>{
+app.post('/kpmgUpload',authenticate,async(req,res)=>{
   let {invoiceNumberf,pn,companyName,status,remarks} = req.body;
   try{
     const inputData = new InputData({
@@ -177,8 +193,8 @@ app.post('/kpmgUpload',async(req,res)=>{
         remarks: remarks,
     });
     await inputData.save();
-    let a2 = fs.readFileSync('public/kpmgform.html')
-    res.send(a2.toString());
+    let a23 = fs.readFileSync('public/kpmgForm.html')
+    res.send(a23.toString());
   }
   catch(err){
     console.error(err);
@@ -191,7 +207,7 @@ app.get('/',(req,res)=>{
     res.sendFile(__dirname+'/public/home.html');
 })
 
-app.get('/offerForm.html',(req,res)=>{
+app.get('/offerForm.html',authenticate,(req,res)=>{
   res.sendFile(__dirname+'/public/offerForm.html')
 })
 
@@ -211,12 +227,13 @@ app.post('/landing',(req, res) => {
       req.session.password = password;
       res.redirect('/landing');
     } else {
-      let a5 = fs.readFileSync("/public/invalid.html");
-      res.status(401).send(a5.toString())
+      let a514 = fs.readFileSync("public/invalid.html");
+      res.status(401).send(a514.toString());
     }
   });
 
-app.get('/contact',(req,res)=>{
+  
+app.get('/contact',authenticate,(req,res)=>{
   res.sendFile(__dirname+'/public/contact.html')
 })
 
