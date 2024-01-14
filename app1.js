@@ -66,6 +66,10 @@ app.get('/sonataUpload',authenticate,(req,res)=>{
   res.sendFile(__dirname+'/public/sonataUpload.html');
 });
 
+app.get('/infosysUpload',authenticate,(req,res)=>{
+  res.sendFile(__dirname+'/public/infosysUpload.html');
+});
+
 app.post('/indFormUpload',authenticate,async(req,res)=>{
   let {invoiceNumberf,pn,companyName,status,remarks} = req.body;
   try{
@@ -125,6 +129,27 @@ app.post('/sonata1Upload',authenticate,async(req,res)=>{
     res.status(500).send('Internal Server Error');
   }
 });
+
+app.post('/infosysUpload',authenticate,async(req,res)=>{
+  let {invoiceNumberf,pn,companyName,status,remarks} = req.body;
+  try{
+    const inputData = new InputData({
+        invoiceNumberf: invoiceNumberf,
+        pn: pn,
+        companyName: companyName,
+        status: status,
+        remarks: remarks,
+    });
+    await inputData.save();
+    let a451 = fs.readFileSync('public/infosysForm.html')
+    res.send(a451.toString());
+  }
+  catch(err){
+    console.error(err);
+    res.status(500).send('Internal Server Error');
+  }
+});
+
 
 app.get('/display',authenticate, async (req, res) => {
   try {
