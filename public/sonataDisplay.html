@@ -6,6 +6,11 @@
     <title>Invoice</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+    <style>
+        .highlight{
+            background-color: rgb(118, 118, 209);
+        }
+    </style>
 </head>
 <body>
     <center><h3>TAX INVOICE</h3></center>
@@ -16,7 +21,6 @@
                     &nbsp;29-2, Level 29, Oval Damansara<br> 
                     &nbsp;685, Jalan Damansara, Taman Tun Dr. Ismail 60000<br> 
                     &nbsp;Wilayah Persekutuan Kuala Lumpur<br> 
-                    &nbsp;E Mail Address : finance@aitekltd.com.<br> 
                     &nbsp;Email: Contact@aitekltd.com<br>
                     &nbsp;SST No. W10-2301-32000038
                 </td>
@@ -34,17 +38,12 @@
                 <td>Invoice Number</td>
                 <td id="invoiceNumber"></td>
             </tr>
-            <tr class="ms-2">
-                <td>&nbsp;Invoice To:</td>
-                <td></td>
-                <td></td>
-            </tr>
             <tr>
                 <td>
+                    &nbsp;Invoice To:<br>
                     &nbsp;SONATA SOFTWARE MALAYSIA SDN. BHD.
                     <br>&nbsp;Address: 29-4 & 31-4, Block F2, Jalan PJU 1/42A,
-                    <br>&nbsp;Dataran Prima, 47301 Petaling Jaya, Selangor,
-                    <br>&nbsp;Singapore 018961<br>&nbsp;Malaysia
+                    <br>&nbsp;Dataran Prima, 47301 Petaling Jaya, Selangor, Malaysia
                 </td>
                 <td></td>
                 <td></td>
@@ -58,10 +57,14 @@
                 <td></td>
             </tr>
             <tr>
-                <td>Service Period -<span id="servicePeriod"></span></td>
+                <td>Service Period</td>
                 <td></td>
             </tr>
-            <tr class="bg-primary h6">
+            <tr>
+                <td><span id="servicePeriod"></span></td>
+                <td></td>
+            </tr>
+            <tr class="highlight h6">
                 <td>Actvity - Consulting Service</td>
                 <td>Quantity</td>
                 <td>Consultant Rate in IDR/Month</td>
@@ -86,19 +89,21 @@
                 <td id="psf"></td>
             </tr>
             <tr>
-                <td>Forex rate: 100 IDR= 0.0316 MYR</td>
-            </tr>
-            <tr>
-                <td>Please remit the total including SST amount to</td>
+                <td>Forex rate: 100 IDR= <span id="forex"></span></td>
             </tr>
             <tr>
                 <td>
+                    Please remit the total including SST amount to<br>
                     AITEK PVK SDN BHD <br>
                     Account No. 8881052269518
                     <br>Swift Code: ARBKMYKL
                     <br>Bank name: AMBANK (M) BERHAD
                     <br>Bank address: JALAN RAJA CHULAN, 55, Kuala Lumpur
                 </td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
             </tr>
             <tr>
                 <td></td>
@@ -128,6 +133,8 @@
                 <td class="text-light">--</td>
                 <td></td>
                 <td></td>
+                <td></td>
+                <td></td>
             </tr>
             <tr>
                 <td></td>
@@ -135,12 +142,16 @@
                 <td></td>
                 <td></td>
                 <td>BALANCE DUE</td>
-                <td id="balanceDue" class="bg-primary h6"></td>
+                <td id="balanceDue" class="highlight h6"></td>
             </tr>
             <tr>
                 <td><b>SST SUMMARY</b></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
             </tr>
-            <tr class="bg-primary h6">
+            <tr class="highlight h6">
                 <td>RATE</td>
                 <td></td>
                 <td></td>
@@ -149,7 +160,7 @@
                 <td>NET AMOUNT</td>
             </tr>
             <tr>
-                <td>SST-<span id="sstSummary"></span>%</td>
+                <td>SST@<span id="sstSummary"></span>%</td>
                 <td></td>
                 <td></td>
                 <td id="sstAmount"></td>
@@ -171,6 +182,7 @@
     const sst = params.get("sst");
     const psf = params.get("psf");
     const fees = params.get("fees");
+    const forex = params.get("forex");
 /*--------------------------------------------DECODING THE EXPORTED VALUES-----------------------------------------*/
     const decinvoiceNumber = decodeURIComponent(invoiceNumber);
     const decdate = decodeURIComponent(date);
@@ -181,6 +193,7 @@
     const decsst = decodeURIComponent(sst);
     const decpsf = decodeURIComponent(psf);
     const decfees = decodeURIComponent(fees); 
+    const decforex = decodeURIComponent(forex); 
 
 /*-------------------------------------------MATHEMATICAL CALCULATIONS--------------------------------------------*/
 
@@ -201,6 +214,7 @@
     document.getElementById("balanceDue").textContent = total;
     document.getElementById("total").textContent = total;
     document.getElementById("sstSummary").textContent = decsst;
+    document.getElementById("forex").textContent = decforex;
     document.getElementById("sstAmount").textContent = sstAmount.toFixed(2);
     document.getElementById("fees").textContent = decfees;
     document.getElementById("netAmount").textContent = subTotalAmount.toFixed(2);
