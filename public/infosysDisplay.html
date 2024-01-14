@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Invoice</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+    <style>
+        .highlight{
+            background-color: rgb(118, 118, 209);
+        }
+    </style>
+</head>
+<body>
+    <center><h3>TAX INVOICE</h3></center>
+    <form>
+        <table border="2" class="border-dark table-bordered w-100">
+            <tr>
+                <td>&nbsp;AITEK SERVICES PTE LTD<br> 
+                    &nbsp;Address: 111 North Bridge Road,<br> 
+                    &nbsp;#27- 01 Peninsula plaza, Singapore<br> 
+                    &nbsp;179098, Phone: 0065 68495467<br> 
+                    &nbsp;E Mail Address : sreekanth@aitekltd.com.<br>
+                    &nbsp;GST Registration No: 201304790R
+                </td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td class="text-center"><img src="./logo.jpeg"></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>Invoice Number</td>
+                <td id="invoiceNumber"></td>
+            </tr>
+            <tr>
+                <td>
+                    &nbsp;Invoice To:<br>
+                    &nbsp;INFOSYS SINGAPORE PTE. LTD
+                    <br>&nbsp;9 Temasek Boulevard, #43-01 Suntech Tower 2
+                    <br>&nbsp;Singapore 038989
+                </td>
+                <td></td>
+                <td></td>
+                <td class="ms-5">Date</td>
+                <td id="date"></td>
+            </tr>
+            <tr>
+                <td class="text-light">--</td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>Service Period</td>
+                <td><span id="servicePeriod"></span></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>Consulting Service</td>
+                <td><span id="serviceName"></span></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>Note: The below table is for reference purpose only as per client's finance request</td>
+            </tr>
+            <tr class="highlight h6">
+                <td>Quantity</td>
+                <td>Rate in MYR/Day</td>
+                <td>Amount in MYR</td>
+                <td>GST</td>
+                <td>TOTAL AMOUNT IN MYR</td>
+            </tr>
+            <tr>
+                <td id="quantity"></td>
+                <td id="myrDay"></td>
+                <td id="myrAmount"></td>
+                <td><span id="gst"></span></td>
+                <td id="myrTotalAmount"></td>
+            </tr>
+            <tr class="highlight h6">
+                <td></td>
+                <td>Rate in SGD/Day</td>
+                <td>Amount in SGD</td>
+                <td>GST</td>
+                <td>TOTAL AMOUNT IN SGD</td>
+            </tr>
+            <tr>
+                <td>Actual Value in SGD</td>
+                <td id="sgdDay"></td>
+                <td id="sgdAmount"></td>
+                <td><span id="gst1"></span>%</td>
+                <td id="sgdTotalAmount"></td>
+            </tr>
+            <tr>
+                <td>
+                    Please remit the total including GST amount to<br>
+                    Account No: 647352756001
+                    <br> Bank: OVERSEA-CHINESE BANKING CORPORATION LIMITED
+                    <br>Account Name: AITEK SERVICES PTE LTD
+                    <br>SWIFT Code: OCBCSGSG
+                </td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>SUB TOTAL</td>
+                <td id="subTotal"></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>GST TOTAL</td>
+                <td id="gstTotal"></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>TOTAL</td>
+                <td id="total"></td>
+            </tr>
+            <tr>
+                <td class="text-light">--</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>BALANCE DUE</td>
+                <td id="balanceDue" class="highlight h6"></td>
+            </tr>
+            <tr>
+                <td><b>GST SUMMARY IN SGD</b></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr class="highlight h6">
+                <td>RATE</td>
+                <td></td>
+                <td>GST AMOUNT</td>
+                <td></td>
+                <td>NET AMOUNT</td>
+            </tr>
+            <tr>
+                <td>GST@<span id="gstSummary"></span>%</td>
+                <td></td>
+                <td id="gstAmount"></td>
+                <td></td>
+                <td id="netAmount"></td>
+            </tr>
+        </table>
+    </form>
+    <h4 class="text-center">THANK YOU FOR THE BUSINESS</h4>
+</body>
+<script>
+    const params = new URLSearchParams(window.location.search);
+    const invoiceNumber = params.get("invoiceNumber");
+    const date = params.get("date");
+    const servicePeriod = params.get("servicePeriod");
+    const quantity = params.get("quantity");
+    const sgd = params.get("sgd");
+    const myr = params.get("myr");
+    const gstNum = params.get("gstNum");
+    const serviceName = params.get("serviceName");
+/*--------------------------------------------DECODING THE EXPORTED VALUES-----------------------------------------*/
+    const decinvoiceNumber = decodeURIComponent(invoiceNumber);
+    const decdate = decodeURIComponent(date);
+    const decservicePeriod = decodeURIComponent(servicePeriod);
+    const decquantity = decodeURIComponent(quantity);
+    const decsgd = decodeURIComponent(sgd);
+    const decmyr = decodeURIComponent(myr);
+    const decgstNum = decodeURIComponent(gstNum);
+    const decserviceName = decodeURIComponent(serviceName); 
+
+/*-------------------------------------------MATHEMATICAL CALCULATIONS--------------------------------------------*/
+
+    const amountMYR = parseFloat(decquantity)*parseFloat(decmyr); 
+    const amountSGD = parseFloat(decquantity)*parseFloat(decsgd);
+    const gstMYR = amountMYR*parseFloat(decgstNum/100);
+    const gstSGD = amountSGD*parseFloat(decgstNum/100);
+    const totalMyrAmount = amountMYR+gstMYR;
+    const totalSgdAmount = amountSGD+gstSGD;
+/*-----------------------------------------------------------------------------------------------------------------*/
+    document.getElementById("invoiceNumber").textContent = decinvoiceNumber;
+    document.getElementById("date").textContent = decdate;
+    document.getElementById("servicePeriod").textContent = " "+decservicePeriod;
+    document.getElementById("serviceName").textContent = " "+decserviceName;
+    document.getElementById("myrDay").textContent = decmyr;
+    document.getElementById("sgdDay").textContent = decsgd;
+    document.getElementById("gst").textContent = gstMYR.toFixed(2);
+    document.getElementById("gst1").textContent = decgstNum;
+    document.getElementById("myrAmount").textContent = amountMYR.toFixed(2);
+    document.getElementById("sgdAmount").textContent = amountSGD.toFixed(2);
+    document.getElementById("sgdTotalAmount").textContent = totalSgdAmount.toFixed(2);
+    document.getElementById("myrTotalAmount").textContent = totalMyrAmount.toFixed(2);
+    document.getElementById("quantity").textContent = decquantity;
+    document.getElementById("balanceDue").textContent = totalSgdAmount.toFixed(2);
+    document.getElementById("total").textContent = totalSgdAmount.toFixed(2);
+    document.getElementById("gstSummary").textContent = decgstNum;
+    document.getElementById("gstAmount").textContent = gstSGD.toFixed(2);
+    document.getElementById("netAmount").textContent = amountSGD.toFixed(2);
+    document.getElementById("subTotal").textContent = amountSGD.toFixed(2);
+    document.getElementById("gstTotal").textContent = gstSGD.toFixed(2);
+/*-----------------------------------------------------------------------------------------------------------------*/
+</script>
+</html>
