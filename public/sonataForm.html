@@ -113,7 +113,15 @@
                     </div>
                 </div>
             </div>
-            
+            <div class="row-md-4 p-2 text-start">
+                <label for="forex" class="form-label ms-2"><b class="text-danger star">* </b><b>Forex Rate</b></label>
+                <div class="input-group has-validation">
+                    <input type="text" class="form-control" id="forex" name="forex" required placeholder="Please enter the forex rate">
+                    <div class="invalid-feedback">
+                        This field is required
+                    </div>
+                </div>
+            </div>
             <div class="row-md-4 p-2 text-start">
                 <label for="psf" class="form-label ms-2"><b class="text-danger star">* </b><b>Professional Services fees</b></label>
                 <div class="input-group has-validation">
@@ -145,6 +153,7 @@
         const idr = document.getElementById("idr").value;
         const myr = document.getElementById("myr").value;
         const psf = document.getElementById("psf").value;
+        const forex = document.getElementById('forex').value;
         if(invoiceNumber.trim()===""||date.trim()===""||servicePeriod.trim()===""||idr.trim()===""
         ||quantity.trim()===""||fees.trim()===""){
             return
@@ -158,6 +167,7 @@
         const ecdidr = encodeURIComponent(idr);
         const ecdmyr = encodeURIComponent(myr);
         const ecdpsf = encodeURIComponent(psf);
+        const ecdforex = encodeURIComponent(forex);
         /*window.location.href = `sonataDisplay.html?invoiceNumber=${ecdinvoiceNumber}&date=${ecddate}&servicePeriod=${ecdservicePeriod}
         &igst=${ecdigst}&days=${ecddays}&amount=${ecdamount}&fees=${ecdfees}`*/
     }
