@@ -20,9 +20,8 @@
                 <td>&nbsp;AITEK SERVICES PTE LTD<br> 
                     &nbsp;Address: 111 North Bridge Road,<br> 
                     &nbsp;#27- 01 Peninsula plaza, Singapore<br> 
-                    &nbsp;179098<br>
-                    &nbsp;Phone: 0065 68495467<br>
-                    &nbsp;E Mail Address : sreekanth@aitekltd.com.<br>
+                    &nbsp;179098, Phone: 0065 68495467<br> 
+                    &nbsp;E Mail Address : contact@aitekltd.com.<br>
                     &nbsp;GST Registration No: 201304790R
                 </td>
                 <td></td>
@@ -85,17 +84,17 @@
             </tr>
             <tr class="highlight h6">
                 <td></td>
+                <td></td>
                 <td>Rate in SGD/Day</td>
-                <td>Amount in SGD</td>
                 <td>GST</td>
-                <td>TOTAL AMOUNT IN SGD</td>
+                <td>Amount in SGD</td>
             </tr>
             <tr>
                 <td>Actual Value in SGD</td>
+                <td></td>
                 <td id="sgdDay"></td>
-                <td id="sgdAmount"></td>
                 <td><span id="gst1"></span>%</td>
-                <td id="sgdTotalAmount"></td>
+                <td id="sgdAmount"></td>
             </tr>
             <tr>
                 <td>
@@ -209,7 +208,7 @@
     document.getElementById("gst1").textContent = decgstNum;
     document.getElementById("myrAmount").textContent = amountMYR.toFixed(2);
     document.getElementById("sgdAmount").textContent = amountSGD.toFixed(2);
-    document.getElementById("sgdTotalAmount").textContent = totalSgdAmount.toFixed(2);
+    //document.getElementById("sgdTotalAmount").textContent = totalSgdAmount.toFixed(2);
     document.getElementById("myrTotalAmount").textContent = totalMyrAmount.toFixed(2);
     document.getElementById("quantity").textContent = decquantity;
     document.getElementById("balanceDue").textContent = totalSgdAmount.toFixed(2);
