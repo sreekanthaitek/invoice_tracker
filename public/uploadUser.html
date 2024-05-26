@@ -39,11 +39,7 @@
         </a>
     </div>
     <h1 class="text-center text-warning"><b><i>Fill up the details</i></b></h1>
-    <div class="d-flex justify-content-center">
-        <a href="/update"><button class="btn btn-warning me-2 button"><b>Update</b></button></a>
-        <a href="/search"><button class="btn btn-danger me-2 button"><b>Search</b></button></a>
-    </div>
-    <form method="post" action="/upload">
+    <form method="post" action="/uploadUser">
         <div class="container">
             <div class="row">
                 <h3><b><i>Staff Particulars</i></b></h3>
@@ -201,10 +197,8 @@
                     <input class="form-control move mb-3" placeholder="Please fill this field" id="addr" name="addr">
                 </div>
             </div>
-            <div class="row">
-                <div class="col-sm mt-2">
-                    <input class="form-control move mb-3 last" id="fullName" name="fullName" readonly>
-                </div>
+            <div class="col-sm mt-2">
+                <input class="form-control move mb-3 last" readonly id="fullName" name="fullName">
             </div>
         </div>
         <center><button class="btn btn-danger button" onclick="details()"><b><i>Submit</i></b></button></center>
@@ -278,8 +272,7 @@
             let contact1 = (contact==='')? text:contact;
             let addr1 = (addr==='')? text:addr;
             let fullName = fName+" "+lName;
-    /*------------------------------------------------------------------------------------------------------------------*/ 
-            document.getElementById('fName').value; document.getElementById('lName').value;
+    /*------------------------------------------------------------------------------------------------------------------*/ document.getElementById('fName').value; document.getElementById('lName').value;
             document.getElementById('nationality').value = nationality1;
             document.getElementById('birthPlace').value = birthPlace1;
             document.getElementById('passNumber').value = passNumber1;

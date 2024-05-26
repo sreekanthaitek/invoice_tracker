@@ -9,8 +9,12 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <link rel="icon" href="logo.jpeg" style="border-radius: 25px;">
     <style>
-         body{
+        .last{
             background-image: linear-gradient(to right, #8894d1,#4072df,hsl(188, 65%, 65%),rgb(49, 225, 146));
+            border: none;
+        }
+         body{
+            background-image: linear-gradient(to right, #677bdf,#4072df,hsl(188, 65%, 65%),rgb(49, 225, 146));
         }
         .button{
             width: 250px;
@@ -23,33 +27,28 @@
             margin-bottom: 20px;
             height: 60px;
         }
-        .logo{
-            border-radius: 10px;
-        }
-        .last{
-            background-image: linear-gradient(to right, #8894d1,#4072df,hsl(188, 65%, 65%),rgb(49, 225, 146));
-            border: none;
-        }
     </style>
 </head>
 <body>
-    <div class="text-end me-4 mt-3">
-        <a class="navbar-brand text-end" href="https://www.aitekltd.com/">
-            <img src="logo.jpeg" alt="" width="120" height="70" class="logo">
-        </a>
-    </div>
     <h1 class="text-center text-warning"><b><i>Fill up the details</i></b></h1>
-    <div class="d-flex justify-content-center">
-        <a href="/update"><button class="btn btn-warning me-2 button"><b>Update</b></button></a>
-        <a href="/search"><button class="btn btn-danger me-2 button"><b>Search</b></button></a>
-    </div>
-    <form method="post" action="/upload">
+    <form action="/getDetails" method="post">
+        <div class="container">
+            <div class="row">
+                <div class="col-md">
+                    <label for="fullName" class="form-label ms-2"><b class="text-danger star">* </b><b>Name</b></label>
+                    <input type="text" class="form-control move" id="fullName" name="fullName" placeholder="Please enter in format: First name + last name eg: Vikram Batra">
+                    <button class="btn btn-warning w-100 mt-2"><b><i>Get Details</i></b></button>
+                </div>
+            </div>
+        </div>
+    </form>
+    <form method="post" action="/update">
         <div class="container">
             <div class="row">
                 <h3><b><i>Staff Particulars</i></b></h3>
                 <div class="col-sm mt-2">
                     <label><b><i>Last Name/Surname/Family Name</i></b></label>
-                    <input class="form-control move" placeholder="Please enter your Surname" id="lName" name="lName">
+                    <input class="form-control move" placeholder="Please enter your Surname" id="lName1" name="lName1">
                 </div>
                 <div class="col-sm mt-2">
                     <label><b><i>First Name</i></b></label>
@@ -207,111 +206,61 @@
                 </div>
             </div>
         </div>
-        <center><button class="btn btn-danger button" onclick="details()"><b><i>Submit</i></b></button></center>
+        <center><button class="btn btn-danger button"><b><i>Submit</i></b></button></center>
     </form>
     <script>
-        function details(){
-            let fName = document.getElementById('fName').value;
-            let lName = document.getElementById('lName').value;
-            let nationality = document.getElementById('nationality').value;
-            let birthPlace = document.getElementById('birthPlace').value;
-            let passNumber = document.getElementById('passNumber').value;
-            let pid = document.getElementById('pid').value;
-            let ped = document.getElementById('ped').value;
-            let pic = document.getElementById('pic').value;
-            let dob = document.getElementById('dob').value;
-            let gender = document.getElementById('gender').value;
-            let race = document.getElementById('race').value;
-            let religion = document.getElementById('religion').value;
-            let ms = document.getElementById('ms').value;
-            let homeAdd = document.getElementById('homeAdd').value;
-            let spouse = document.getElementById('spouse').value;
-            let child = document.getElementById('child').value;
-            let mail = document.getElementById('mail').value;
-            let tCon = document.getElementById('tCon').value;
-            let mCon = document.getElementById('mCon').value;
-            let bankDetails = document.getElementById('bankDetails').value;
-            let pBank = document.getElementById('pBank').value;
-            let addrBank = document.getElementById('addrBank').value;
-            let accNum = document.getElementById('accNum').value;
-            let sortCode = document.getElementById('sortCode').value;
-            let swiftCode = document.getElementById('swiftCode').value;
-            let iban = document.getElementById('iban').value;
-            let bInfo = document.getElementById('bInfo').value;
-            let taxIdentity = document.getElementById('taxIdentity').value;
-            let emgName = document.getElementById('emgName').value;
-            let emgRelation = document.getElementById('emgRelation').value;
-            let contact = document.getElementById('contact').value;
-            let addr = document.getElementById('addr').value;
-    /*------------------------------------------------------------------------------------------------------------------*/
-            let text = 'No value given by the user';
-            let fName1 = (fName==='')? text:fName;
-            let lName1 = (lName==='')? text:fName;
-            let nationality1 = (nationality==='')? text:nationality;
-            let birthPlace1 = (birthPlace==='')? text:birthPlace;
-            let passNumber1 = (passNumber==='')? text:passNumber;
-            let pid1 = (pid==='')? text:pid;
-            let ped1 = (ped==='')? text:ped;
-            let pic1 = (pic==='')? text:pic;
-            let dob1 = (dob==='')? text:dob;
-            let gender1 = (gender==='')? text:gender;
-            let race1 = (race==='')? text:race;
-            let religion1 = (religion==='')? text:religion;
-            let ms1 = (ms==='')? text:ms;
-            let homeAdd1 = (homeAdd==='')? text:homeAdd;
-            let spouse1 = (spouse==='')? text:spouse;
-            let child1 = (child==='')? text:child;
-            let mail1 = (mail==='')? text:mail;
-            let tCon1 = (tCon==='')? text:tCon;
-            let mCon1 = (mCon==='')? text:mCon;
-            let bankDetails1 = (bankDetails==='')? text:bankDetails;
-            let pBank1 = (pBank==='')? text:pBank;
-            let addrBank1 = (addrBank==='')? text:addrBank;
-            let accNum1 = (accNum==='')? text:accNum;
-            let sortCode1 = (sortCode==='')? text:sortCode;
-            let swiftCode1 = (swiftCode==='')? text:swiftCode;
-            let iban1 = (iban==='')? text:iban;
-            let bInfo1 = (bInfo==='')? text:bInfo;
-            let taxIdentity1 = (taxIdentity==='')? text:taxIdentity;
-            let emgName1 = (emgName==='')? text:emgName;
-            let emgRelation1 = (emgRelation==='')? text:emgRelation;
-            let contact1 = (contact==='')? text:contact;
-            let addr1 = (addr==='')? text:addr;
-            let fullName = fName+" "+lName;
-    /*------------------------------------------------------------------------------------------------------------------*/ 
-            document.getElementById('fName').value; document.getElementById('lName').value;
-            document.getElementById('nationality').value = nationality1;
-            document.getElementById('birthPlace').value = birthPlace1;
-            document.getElementById('passNumber').value = passNumber1;
-            document.getElementById('pid').value = pid1;
-            document.getElementById('ped').value = ped1;
-            document.getElementById('pic').value = pic1;
-            document.getElementById('dob').value = dob1;
-            document.getElementById('gender').value = gender1;
-            document.getElementById('race').value = race1;
-            document.getElementById('religion').value = religion1;
-            document.getElementById('ms').value = ms1;
-            document.getElementById('homeAdd').value = homeAdd1;
-            document.getElementById('spouse').value = spouse1;
-            document.getElementById('child').value = child1;
-            document.getElementById('mail').value = mail1;
-            document.getElementById('tCon').value = tCon1;
-            document.getElementById('mCon').value = mCon1;
-            document.getElementById('bankDetails').value = bankDetails1;  
-            document.getElementById('pBank').value = pBank1;
-            document.getElementById('addrBank').value = addrBank1;
-            document.getElementById('accNum').value = accNum1;
-            document.getElementById('sortCode').value = sortCode1;
-            document.getElementById('swiftCode').value = swiftCode1;
-            document.getElementById('iban').value =  iban1;
-            document.getElementById('bInfo').value = bInfo1;
-            document.getElementById('taxIdentity').value = taxIdentity1;
-            document.getElementById('emgName').value = emgName1;
-            document.getElementById('emgRelation').value = emgRelation1;
-            document.getElementById('contact').value = contact1;
-            document.getElementById('addr').value = addr1;
-            document.getElementById('fullName').value = fullName;
+        document.querySelector('form:first-of-type').addEventListener('submit', async function (event) {
+        event.preventDefault();
+    
+        //const lName = document.querySelector('[lName="lName"]').value;
+        const fullName = document.getElementById('fullName').value;
+        const response = await fetch('/getDetails', {
+            method: 'POST',
+            headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: `fullName=${fullName}`,
+        });
+    
+        const data = await response.json();
+        console.log(data.lName);
+        if (data.message) {
+            alert(data.message);
+        } else {
+            document.getElementById('lName1').value = data.lName;
+            document.getElementById('fName').value = data.fName;
+            document.getElementById('nationality').value = data.nationality;
+            document.getElementById('birthPlace').value = data.birthPlace;
+            document.getElementById('passNumber').value = data.passNumber;
+            document.getElementById('pid').value = data.pid;
+            document.getElementById('ped').value = data.ped;
+            document.getElementById('pic').value = data.pic;
+            document.getElementById('dob').value = data.dob;
+            document.getElementById('gender').value = data.gender;
+            document.getElementById('race').value = data.race;
+            document.getElementById('religion').value = data.religion;
+            document.getElementById('ms').value = data.ms;
+            document.getElementById('homeAdd').value = data.homeAdd;
+            document.getElementById('spouse').value = data.spouse;
+            document.getElementById('child').value = data.child;
+            document.getElementById('mail').value = data.mail;
+            document.getElementById('tCon').value = data.tCon;
+            document.getElementById('mCon').value = data.mCon;
+            document.getElementById('bankDetails').value = data.bankDetails;  
+            document.getElementById('pBank').value = data.pBank;
+            document.getElementById('addrBank').value = data.addrBank;
+            document.getElementById('accNum').value = data.accNum;
+            document.getElementById('sortCode').value = data.sortCode;
+            document.getElementById('swiftCode').value = data.swiftCode;
+            document.getElementById('iban').value =  data.iban;
+            document.getElementById('bInfo').value = data.bInfo;
+            document.getElementById('taxIdentity').value = data.taxIdentity;
+            document.getElementById('emgName').value = data.emgName;
+            document.getElementById('emgRelation').value = data.emgRelation;
+            document.getElementById('contact').value = data.contact;
+            document.getElementById('addr').value = data.addr;
         }
+        });
     </script>
     <script>
         $(function(){

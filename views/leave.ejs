@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+  <title>Search Result</title>
+  <link rel="icon" href="logo.jpeg" style="border-radius: 25px;">
+  <style>
+      body{
+          background-image: linear-gradient(to right, #6a7287,rgb(169, 179, 150),rgb(33, 233, 243));
+          }
+      @media print {
+          #but{
+            display: none;
+          }
+      }
+      .image{
+        width: 150px;
+        height: 90px;
+      }
+  </style>
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg ">
+    <div class="container-fluid">
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="/searchLeave"><button class="btn btn-outline-light"><b><i>Search</i></b></button></a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="/updateLeave"><button class="btn btn-outline-light"><b><i>Update</i></b></button></a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="/uploadLeave"><button class="btn btn-outline-light"><b><i>Upload</i></b></button></a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="/delete"><button class="btn btn-outline-light"><b><i>Delete</i></b></button></a>
+        </li>
+        <li class="nav-item">
+        <a class="nav-link active" href="./contact"><button class="btn btn-outline-light"><b><i>Contact</i></b></button></a>
+        </li>
+        </ul>
+        </div>
+        <div class="container text-end">
+          <a class="navbar-brand text-end" href="https://www.aitekltd.com/">
+              <img src="logo.jpeg" alt="" width="100" height="60">
+          </a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" id="but" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+      </div>
+    </div>
+</nav>
+  <% if (result) { %>
+    <div class="table-responsive-sm">
+      <h1 class="text-center mb-3 mt-2"><b><i>LEAVE STATUS-<%= result.year%></i></b></h1>
+      <table class="border-dark table-bordered table">
+        <tr class="table-primary">
+          <td><b><i>Company Name:</i></b></td>
+          <td><%= result.cn%></td>
+        </tr>
+        <tr class="table-secondary">
+          <td><b><i>Client Name:</i></b></td>
+          <td><%= result.clientName%></td>
+        </tr>
+        <tr class="table-success">
+          <td><b><i>Name:</i></b></td>
+          <td><%= result.name%></td>
+        </tr>
+        <tr class="table-warning">
+          <td><b><i>Reamining Annual Leaves</i></b></td>
+          <td><%= result.aLeaves%></td>
+        </tr>
+        <tr class="table-light">
+          <td><b><i>Reamining Medical Leaves</i></b></td>
+          <td><%= result.mLeaves%></td>
+        </tr>
+        <tr class="table-info">
+          <td><b><i>Carry Forward leaves</i></b></td>
+          <td><%= result.cf%></td>
+        </tr>
+      </table>
+    </div>
+    <h2 class="text-center mb-1 mt-2"><b><i>Monthly Leave Details</i></b></h2>
+    <h3 class="mb-3 mt-2 ms-2"><b><i>Annual Leaves</i></b></h3>
+    <div class="table-responsive-sm">
+      <table class="border-secondary table-bordered table">
+        <tr>
+          <td><b><i>January: </i></b><%= result.jan %></td>
+          <td><b><i>February: </i></b><%= result.feb %></td>
+          <td><b><i>March: </i></b><%= result.mar %></td>
+          <td><b><i>April: </i></b><%= result.apr %></td>
+          <td><b><i>May: </i></b><%= result.may %></td>
+          <td><b><i>June: </i></b><%= result.jun %></td>
+        </tr>
+        <tr>
+          <td><b><i>July: </i></b><%= result.jul %></td>
+          <td><b><i>August: </i></b><%= result.aug %></td>
+          <td><b><i>September: </i></b><%= result.sep %></td>
+          <td><b><i>October: </i></b><%= result.oct %></td>
+          <td><b><i>November: </i></b><%= result.nov %></td>
+          <td><b><i>December: </i></b><%= result.dec %></td>
+        </tr>
+      </table>
+    </div>
+    <h3 class="mb-3 mt-2 ms-2"><b><i>Medical Leaves</i></b></h3>
+    <div class="table-responsive-sm">
+      <table class="border-secondary table-bordered table">
+        <tr>
+          <td><b><i>January: </i></b><%= result.jan_ml %></td>
+          <td><b><i>February: </i></b><%= result.feb_ml %></td>
+          <td><b><i>March: </i></b><%= result.mar_ml %></td>
+          <td><b><i>April: </i></b><%= result.apr_ml %></td>
+          <td><b><i>May: </i></b><%= result.may_ml %></td>
+          <td><b><i>June: </i></b><%= result.jun_ml %></td>
+        </tr>
+        <tr>
+          <td><b><i>July: </i></b><%= result.jul_ml %></td>
+          <td><b><i>August: </i></b><%= result.aug_ml %></td>
+          <td><b><i>September: </i></b><%= result.sep_ml %></td>
+          <td><b><i>October: </i></b><%= result.oct_ml %></td>
+          <td><b><i>November: </i></b><%= result.nov_ml %></td>
+          <td><b><i>December: </i></b><%= result.dec_ml %></td>
+        </tr>
+      </table>
+    </div>
+  <% } else if (error) { %>
+    <h1 class="text-danger text-center"><b><i>An error occured</i></b></h1>
+    <h2 class="text-warning text-center"><b><i>Please check the Spelling of the name given</i></b></h2>
+  <% } %>
+</body>
+</html>

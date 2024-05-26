@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Data Display</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+  <link rel="icon" href="logo.jpeg" style="border-radius: 25px;">
+  <style>
+    .btn{
+      width: 80px;
+    }
+    body{
+      background-color: rgb(242, 187, 115);
+    }
+    #paidCheckbox{
+      width: 20px;
+      height: 20px;
+    }
+    #notPaidCheckbox{
+      width: 20px;
+      height: 20px;
+    }
+    #paidCheckbox1{
+      width: 20px;
+      height: 20px;
+    }
+    #notPaidCheckbox1{
+      width: 20px;
+      height: 20px;
+    }
+    #dropdownOptions{
+      height: 48px;
+      border-radius: 20px;
+    }
+  </style>
+</head>
+<body>
+  <h1 class="text-center"><i>Details of the employees</i></h1>
+  <% data.forEach(entry => { %>
+    <div id="<%= entry._id %>" >
+        <div class="row mx-3 my-3">
+          <div class="col">
+            <div class="card">
+              <table class="table table-bordered">
+                <tr class="table-dark">
+                  <td><h3><b><i>Name</i></b></h3></td>
+                  <td><h4><b><i><%= entry.fullName %></i></b></h4></td>
+                </tr>
+                <tr class="table-light">
+                  <td><h4><b><i>Personal Details</i></b></h4></td>
+                </tr>
+                <tr class="table-primary">
+                  <td><b><i>Full Name: </i></b></td>
+                  <td><%= entry.fullName %></td>
+                  <td><b><i>Last Name: </i></b></td>
+                  <td><%= entry.lName %></td>
+                  <td><b><i>First Name: </i></b></td>
+                  <td><%= entry.fName %></td>
+                </tr>
+                <tr class="table-primary">
+                  <td><b><i>Nationality: </i></b></td>
+                  <td><%= entry.nationality %></td>
+                  <td><b><i>Pass Number: </i></b></td>
+                  <td><%= entry.passNumber %></td>
+                  <td><b><i>Passport issued Date: </i></b></td>
+                  <td><%= entry.pid %></td>
+                </tr>
+                <tr class="table-primary">
+                  <td><b><i>Passport Expiry Date: </i></b></td>
+                  <td><%= entry.ped %></td>
+                  <td><b><i>Passport Issued Country: </i></b></td>
+                  <td><%= entry.pic %></td>
+                  <td><b><i></i></b></td>
+                  <td></td>
+                </tr>
+                <tr class="table-light">
+                  <td><h4><b><i>Other Personal Details</i></b></h4></td>
+                </tr>
+                <tr class="table-warning">
+                  <td><b><i>Date of Birth: </i></b></td>
+                  <td><%= entry.dob %></td>
+                  <td><b><i>Gender: </i></b></td>
+                  <td><%= entry.gender %></td>
+                  <td><b><i>Race: </i></b></td>
+                  <td><%= entry.race %></td>
+                </tr>
+                <tr class="table-warning">
+                  <td><b><i>Religion: </i></b></td>
+                  <td><%= entry.religion %></td>
+                  <td><b><i>Martial Status: </i></b></td>
+                  <td><%= entry.ms %></td>
+                  <td><b><i>Home Adress: </i></b></td>
+                  <td><%= entry.homeAdd %></td>
+                </tr>
+                <tr class="table-warning">
+                  <td><b><i>Name of the Spouse: </i></b></td>
+                  <td><%= entry.spouse %></td>
+                  <td><b><i>Children: </i></b></td>
+                  <td><%= entry.child %></td>
+                  <td><b><i>Email: </i></b></td>
+                  <td><%= entry.email %></td>
+                </tr>
+                <tr class="table-warning">
+                  <td><b><i>Telephone Contact: </i></b></td>
+                  <td><%= entry.tCon %></td>
+                  <td><b><i>Mobile Contact: </i></b></td>
+                  <td><%= entry.mCon %></td>
+                  <td><b><i></i></b></td>
+                  <td></td>
+                </tr>
+                <tr class="table-light">
+                  <td><h4><b><i>Bank Details</i></b></h4></td>
+                </tr>
+                <tr class="table-info">
+                  <td><b><i>Name as per Bank: </i></b></td>
+                  <td><%= entry.bankDetails %></td>
+                  <td><b><i>Personal Bank Name: </i></b></td>
+                  <td><%= entry.pBank %></td>
+                  <td><b><i>Address of the bank: </i></b></td>
+                  <td><%= entry.addrBank %></td>
+                </tr>
+                <tr class="table-info">
+                  <td><b><i>Personal Bank account number: </i></b></td>
+                  <td><%= entry.accNum %></td>
+                  <td><b><i>Sort Code: </i></b></td>
+                  <td><%= entry.sortCode %></td>
+                  <td><b><i>Swift Code: </i></b></td>
+                  <td><%= entry.swiftCode %></td>
+                </tr>
+                <tr class="table-info">
+                  <td><b><i>IBAN: </i></b></td>
+                  <td><%= entry.iban %></td>
+                  <td><b><i>Bank Info: </i></b></td>
+                  <td><%= entry.bInfo %></td>
+                  <td><b><i>Tax Identity: </i></b></td>
+                  <td><%= entry.taxIdentity %></td>
+                </tr>
+                <tr class="table-light">
+                  <td><h4><b><i>Emergency Contact</i></b></h4></td>
+                </tr>
+                <tr class="table-danger">
+                  <td><b><i>Name: </i></b></td>
+                  <td><%= entry.emgName %></td>
+                  <td><b><i>Relation: </i></b></td>
+                  <td><%= entry.emgRelation %></td>
+                  <td><b><i>Contact: </i></b></td>
+                  <td><%= entry.contact %></td>
+                </tr>
+                <tr class="table-danger">
+                  <td><b><i>Address</i></b></td>
+                  <td><%= entry.addr %></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                </tr>
+              </table>
+            <!---  <div class="card-body">
+                <h4 class="card-title"><b><i>Full Name: </i></b><%= entry.fullName %></h5>
+                <p class="card-text"><b><i>Last Name: </i></b><%= entry.lName %></p>
+                <p class="card-text"><b><i>First Name: </i></b><%= entry.fName %></p>
+                <p class="card-text"><b><i>Nationality: </i></b><%= entry.nationality %></p>
+                <p class="card-text"><b><i>Pass Number: </i></b><%= entry.passNumber %></p>
+                <p class="card-text"><b><i>Passport Issued Date: </i></b><%= entry.pid %></p>
+                <p class="card-text"><b><i>Passport expiry Date: </i></b><%= entry.ped %></p>
+                <p class="card-text"><b><i>Passport Issued Country: </i></b><%= entry.pic %></p>
+                <h5 class="card-text"><b><i>Other Personal Details</i></b></h5>
+                <p class="card-text"><b><i>Date of Birth: </i></b><%= entry.dob %></p>
+                <p class="card-text"><b><i>Gender: </i></b><%= entry.gender %></p>
+                <p class="card-text"><b><i>Race: </i></b><%= entry.race %></p>
+                <p class="card-text"><b><i>Religion: </i></b><%= entry.religion %></p>
+                <p class="card-text"><b><i>Martial Status: </i></b><%= entry.ms %></p>
+                <p class="card-text"><b><i>Home Address: </i></b><%= entry.homeAdd %></p>
+                <p class="card-text"><b><i>Name of the spouse: </i></b><%= entry.spouse %></p>
+                <p class="card-text"><b><i>Children: </i></b><%= entry.child %></p>
+                <p class="card-text"><b><i>Email: </i></b><%= entry.mail %></p>
+                <p class="card-text"><b><i>Telephone Contact: </i></b><%= entry.tCon %></p>
+                <p class="card-text"><b><i>Mobile Contact: </i></b><%= entry.mCon %></p>
+                <h5 class="card-text"><b><i>Bank Details</i></b></h5>
+                <p class="card-text"><b><i>Name as per bank: </i></b><%= entry.bankDetails %></p>
+                <p class="card-text"><b><i>Personal bank Name: </i></b><%= entry.pBank %></p>
+                <p class="card-text"><b><i>Address of the bank: </i></b><%= entry.addrBank %></p>
+                <p class="card-text"><b><i>Personal Bank account number: </i></b><%= entry.accNum %></p>
+                <p class="card-text"><b><i>Sort Code: </i></b><%= entry.sortCode %></p>
+                <p class="card-text"><b><i>Swift Code: </i></b><%= entry.swiftCode %></p>
+                <p class="card-text"><b><i>IBAN: </i></b><%= entry.iban %></p>
+                <p class="card-text"><b><i>Bank Info: </i></b><%= entry.bInfo %></p>
+                <p class="card-text"><b><i>Tax Identity: </i></b><%= entry.taxIdentity %></p>
+                <h5 class="card-text"><b><i>Emergency Contact</i></b></h5>
+                <p class="card-text"><b><i>Name: </i></b><%= entry.emgName %></p>
+                <p class="card-text"><b><i>Relation: </i></b><%= entry.emgRelation %></p>
+                <p class="card-text"><b><i>Contact: </i></b><%= entry.contact %></p>
+                <p class="card-text"><b><i>Address: </i></b><%= entry.addr %></p>
+                </div> -->
+              </div>
+            </div>
+          </div>
+        </div>
+  <% }) %>
+</body>
+</html>
