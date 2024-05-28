@@ -33,7 +33,9 @@ app.use(session({
       next();
     } else {
       //res.status(401).send('Unauthorized. Please log in.');
-      res.status(401).sendFile(__dirname+'/public/unauth.html')
+      //res.status(401).sendFile(__dirname+'/public/unauth.html')
+      let g = fs.readFileSync("public/unauth.html");
+      res.status(404).send(g.toString());
     }
   };
 
@@ -46,7 +48,9 @@ app.use(session({
       next();
     } else {
       //res.status(401).send('Unauthorized. Please log in.');
-      res.status(401).sendFile(__dirname+'/public/unauth.html')
+      //res.status(401).sendFile(__dirname+'/public/unauth.html')
+      let g = fs.readFileSync("public/unauth.html");
+      res.status(404).send(g.toString());
     }
   };
 
