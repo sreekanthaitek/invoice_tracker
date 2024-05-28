@@ -23,14 +23,30 @@ app.use(session({
   mongoose.connect(conn);
   const userName = process.env.USER_NAME;
   const pass = process.env.PASSWORD;
+  const passStaff = process.env.PASSWORD_STAFF;
   // Authentication middleware
+
   const authenticate = (req, res, next) => {
     const { username, password } = req.session;
     const isAuthenticated = username === userName && password === pass;
     if (isAuthenticated) {
       next();
     } else {
-      res.status(401).send('Unauthorized. Please log in.');
+      //res.status(401).send('Unauthorized. Please log in.');
+      res.status(401).sendFile(__dirname+'/public/unauth.html')
+    }
+  };
+
+  const authenticateStaff = (req, res, next) => {
+    const { username, password } = req.session;
+    const { usernameStaff, passwordStaff } = req.session;
+    const isAuthenticated = username === userName && password === pass;
+    const isAuthenticatedStaff = usernameStaff === userName && passwordStaff === passStaff;
+    if (isAuthenticated|| isAuthenticatedStaff) {
+      next();
+    } else {
+      //res.status(401).send('Unauthorized. Please log in.');
+      res.status(401).sendFile(__dirname+'/public/unauth.html')
     }
   };
 
@@ -46,19 +62,27 @@ const inputSchema = new mongoose.Schema({
 
 const InputData = mongoose.model('InputData',inputSchema);
 
-app.get('/atkFormUpload',(req,res)=>{
+app.get('/atkFormUpload',authenticate,(req,res)=>{
   res.sendFile(__dirname+'/public/atkFormUpload.html');
 });
 
-app.get('/indFormUpload',(req,res)=>{
+app.get('/indFormUpload',authenticate,(req,res)=>{
   res.sendFile(__dirname+'/public/indFormUpload.html');
 });
 
-app.get('/rzUpload',(req,res)=>{
+app.get('/rzUpload',authenticate,(req,res)=>{
   res.sendFile(__dirname+'/public/rzUpload.html');
 });
 
-app.post('/indFormUpload',async(req,res)=>{
+app.get('/login',(req,res)=>{
+  res.render('login');
+})
+
+app.get('/loginStaff',(req,res)=>{
+  res.render('loginStaff');
+})
+
+app.post('/indFormUpload',authenticate,async(req,res)=>{
   let {invoiceNumberf,pn,companyName,status,remarks} = req.body;
   try{
     const inputData = new InputData({
@@ -78,7 +102,7 @@ app.post('/indFormUpload',async(req,res)=>{
   }
 })
 
-app.get('/display', async (req, res) => {
+app.get('/display',authenticate, async (req, res) => {
   try {
     const data = await InputData.find();
     res.render('display', { data });
@@ -98,7 +122,7 @@ app.post('/update/:id', async (req, res) => {
   }
 });
 
-app.post('/atkFormUpload',async(req,res)=>{
+app.post('/atkFormUpload',authenticate,async(req,res)=>{
     let {invoiceNumberf,pn,companyName,status,remarks} = req.body;
     try{
       const inputData = new InputData({
@@ -118,7 +142,7 @@ app.post('/atkFormUpload',async(req,res)=>{
     }
 })
 
-app.post('/rzUpload',async(req,res)=>{
+app.post('/rzUpload',authenticate,async(req,res)=>{
   let {invoiceNumberf,pn,companyName,status,remarks} = req.body;
   try{
     const inputData = new InputData({
@@ -138,15 +162,15 @@ app.post('/rzUpload',async(req,res)=>{
   }
 })
 
-app.get('/kpmgUpload',(req,res)=>{
+app.get('/kpmgUpload',authenticate,(req,res)=>{
   res.sendFile(__dirname+'/public/kpmgUpload.html');
 })
 
-app.get('/form3upload',(req,res)=>{
+app.get('/form3upload',authenticate,(req,res)=>{
   res.sendFile(__dirname+'/public/form3upload.html');
 })
 
-app.post('/form3upload',async(req,res)=>{
+app.post('/form3upload',authenticate,async(req,res)=>{
   let {invoiceNumberf,pn,companyName,status,remarks} = req.body;
   try{
     const inputData = new InputData({
@@ -166,7 +190,7 @@ app.post('/form3upload',async(req,res)=>{
   }
 })
 
-app.post('/kpmgUpload',async(req,res)=>{
+app.post('/kpmgUpload',authenticate,async(req,res)=>{
   let {invoiceNumberf,pn,companyName,status,remarks} = req.body;
   try{
     const inputData = new InputData({
@@ -191,7 +215,7 @@ app.get('/',(req,res)=>{
     res.sendFile(__dirname+'/public/home.html');
 })
 
-app.get('/offerForm.html',(req,res)=>{
+app.get('/offerForm.html',authenticate,(req,res)=>{
   res.sendFile(__dirname+'/public/offerForm.html')
 })
 
@@ -211,12 +235,25 @@ app.post('/landing',(req, res) => {
       req.session.password = password;
       res.redirect('/landing');
     } else {
-      let a5 = fs.readFileSync("/public/invalid.html");
-      res.status(401).send(a5.toString())
+      /*let a5 = fs.readFileSync("/public/invalid.html");
+      res.status(401).send(a5.toString())*/
+      res.sendFile(__dirname + "/public/invalid.html")
     }
   });
 
-app.get('/contact',(req,res)=>{
+  app.post('/landingLeave',(req, res) => {
+    const { usernameStaff, passwordStaff } = req.body;
+  
+    if (usernameStaff === userName && passwordStaff === passStaff) {
+      req.session.usernameStaff = usernameStaff;
+      req.session.passwordStaff = passwordStaff;
+      res.redirect('/landingLeave');
+    } else {
+      res.sendFile(__dirname + "/public/invalid.html")
+    }
+  });
+
+app.get('/contact',authenticate,(req,res)=>{
   res.sendFile(__dirname+'/public/contact.html')
 })
 
@@ -472,7 +509,7 @@ app.post('/upload',authenticate,async(req,res)=>{
     }
 })
 
-app.get('/details', async (req, res) => {
+app.get('/details', authenticate,async (req, res) => {
   try {
     const data = await InputData1.find();
     res.render('details', { data });
@@ -585,17 +622,17 @@ const inputSchema2 = new mongoose.Schema({
 
 const InputData2 = mongoose.model('Leave_Tracker', inputSchema2);
 
-app.get('/landingLeave',authenticate, (req, res) => {
+app.get('/landingLeave',authenticateStaff, (req, res) => {
 res.sendFile(__dirname + '/public/landingLeave.html');
 });
 
 // Upload.html route
-app.get('/uploadLeave',authenticate, (req, res) => {
+app.get('/uploadLeave',authenticateStaff, (req, res) => {
   res.sendFile(__dirname + '/public/uploadLeave.html');
 });
 
 // Update details route
-app.post('/updateDetailsLeave',authenticate, async (req, res) => {
+app.post('/updateDetailsLeave',authenticateStaff, async (req, res) => {
   const name = req.body.name;
   const jan = req.body.jan;
   const { cn,clientName,year,cf,al,ml,feb,mar,apr,may,jun,jul,aug,sep,oct,nov,dec,jan_ml,feb_ml,mar_ml,apr_ml,may_ml,jun_ml,jul_ml,aug_ml,sep_ml,oct_ml,nov_ml,dec_ml } = req.body;
@@ -621,7 +658,7 @@ app.post('/updateDetailsLeave',authenticate, async (req, res) => {
   }
 });
 
-app.post('/uploadLeave',authenticate, async (req, res) => {
+app.post('/uploadLeave',authenticateStaff, async (req, res) => {
 let {year,cn,clientName,name,cf,al,ml,jan,feb,mar,apr,may,jun,jul,aug,sep,oct,nov,dec,jan_ml,feb_ml,mar_ml,apr_ml,may_ml,jun_ml,jul_ml,aug_ml,sep_ml,oct_ml,nov_ml,dec_ml} = req.body;
 const aLeaves = parseInt(jan)+parseInt(feb)+parseInt(mar)+parseInt(apr)+parseInt(may)+parseInt(jun)+parseInt(jul)+parseInt(aug)+parseInt(sep)+parseInt(oct)+parseInt(nov)+parseInt(dec);
 const mLeaves = parseInt(jan_ml)+parseInt(feb_ml)+parseInt(mar_ml)+parseInt(apr_ml)+parseInt(may_ml)+parseInt(jun_ml)+parseInt(jul_ml)+parseInt(aug_ml)+parseInt(sep_ml)+parseInt(oct_ml)+parseInt(nov_ml)+parseInt(dec_ml);
@@ -671,11 +708,11 @@ try {
 });
 
 // Search
-app.get('/searchLeave',authenticate, (req, res) => {
+app.get('/searchLeave',authenticateStaff, (req, res) => {
 res.sendFile(__dirname + '/public/searchLeave.html');
 });
 
-app.post('/searchLeave',authenticate, (req, res) => {
+app.post('/searchLeave',authenticateStaff, (req, res) => {
 const searchName = req.body.name;
 
 InputData2.findOne({ name: searchName }).exec()
@@ -692,11 +729,11 @@ InputData2.findOne({ name: searchName }).exec()
 }); 
 
 // Delete
-app.get('/delete',authenticate, (req, res) => {
+app.get('/delete',authenticateStaff, (req, res) => {
 res.sendFile(__dirname + '/public/delete.html');
 });
 
-app.post('/delete',authenticate, async (req, res) => {
+app.post('/delete',authenticateStaff, async (req, res) => {
 const nameToDelete = req.body.name;
 try {
   const result = await InputData2.findOneAndDelete({ name: nameToDelete });
@@ -714,13 +751,12 @@ try {
 });
 
 //Update
-app.get('/updateLeave',authenticate,(req,res)=>{
+app.get('/updateLeave',authenticateStaff,(req,res)=>{
 res.sendFile(__dirname+'/public/updateLeave.html')
 });
 
-app.post('/getDetailsLeave', async (req, res) => {
+app.post('/getDetailsLeave', authenticateStaff, async (req, res) => {
 const name = req.body.name;
-console.log(name);
 try {
   const user = await InputData2.findOne({ name: name });
   if (user) {
